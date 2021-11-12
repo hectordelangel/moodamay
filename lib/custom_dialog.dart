@@ -44,11 +44,11 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
           margin: EdgeInsets.only(top: avatarRadius),
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
-              color: Colors.white,
+              color: white,
               borderRadius: BorderRadius.circular(padding),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
+                    color: babyblue, offset: Offset(0, 10), blurRadius: 10),
               ]),
           child: Column(
             mainAxisSize: MainAxisSize.min,

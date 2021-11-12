@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:moodamay/home.dart';
 import 'package:moodamay/onboard/onboard_model.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:moodamay/custom_dialog.dart';
+import 'package:velocity_x/velocity_x.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constant.dart';
 
@@ -91,28 +95,9 @@ class _OnBoardState extends State<OnBoard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
-      appBar: AppBar(
-        backgroundColor: white,
-        elevation: 0.0,
-        // actions: [
-        //   // TextButton(
-        //   //   onPressed: () {
-        //   //     _storeOnboardInfo();
-        //   //     Navigator.pushReplacement(
-        //   //         context, MaterialPageRoute(builder: (context) => Home()));
-        //   //   },
-        //   //   child: Text(
-        //   //     "Skip",
-        //   //     style: TextStyle(
-        //   //       color: currentIndex % 2 == 0 ? kblack : kwhite,
-        //   //     ),
-        //   //   ),
-        //   // )
-        // ],
-      ),
+      backgroundColor: Color(0xFFF7F7F7),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
         child: PageView.builder(
             itemCount: screens.length,
             controller: _pageController,
@@ -123,161 +108,211 @@ class _OnBoardState extends State<OnBoard> {
               });
             },
             itemBuilder: (_, index) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Image.asset(
-                    screens[index].img,
-                    height: 200,
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                    child: ListView.builder(
-                      itemCount: screens.length,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 3.0),
-                                width: currentIndex == index ? 40 : 8,
-                                height: 8,
-                                decoration: BoxDecoration(
-                                  color: currentIndex == index
-                                      ? jasmine
-                                      : yellowcrayola,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                              ),
-                            ]);
-                      },
+              return Material(
+                child: Stack(
+                  children: [
+                    Container(
+                      color: pink,
                     ),
-                  ),
-                  Text(
-                    screens[index].text,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 27.0,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Poppins',
-                      color: babyblue,
-                    ),
-                  ),
-                  screens[index].input != true
-                      ? Text(
-                          screens[index].desc,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Montserrat',
-                            color: babyblue,
-                          ),
-                        )
-                      : Container(
-                          width: 200.0,
-                          child: Form(
-                            key: _formKey,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                TextFormField(
-                                  controller: username,
-                                  textAlign: TextAlign.center,
-                                  decoration: InputDecoration(
-                                    hintText: "Write your name!",
-                                    focusedBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(25.7),
-                                    ),
-                                    enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.white),
-                                      borderRadius: BorderRadius.circular(25.7),
-                                    ),
-                                    fillColor: Colors.white,
-                                    filled: true,
-
-                                    //fillColor: Colors.green
-                                  ),
-                                  validator: (String? value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Please tell me :(';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ],
+                    Container(
+                      alignment: Alignment.center,
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * .92,
+                      decoration: const BoxDecoration(
+                          color: Color(0xFFF7F7F7),
+                          borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(50),
+                            bottomRight: Radius.circular(50),
+                          )),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              screens[index].img,
+                              height: 250,
                             ),
-                          ),
-                        ),
-                  InkWell(
-                    onTap: () async {
-                      // ignore: avoid_print
-                      print(index);
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30.0),
+                              child: Text(screens[index].text,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 30.0,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Poppins',
+                                    color: Color.fromRGBO(41, 50, 65, 1.0),
+                                  )),
+                            ),
+                            .8.heightBox,
+                            screens[index].input != true
+                                ? Padding(
+                                    padding: const EdgeInsets.only(top: 30.0),
+                                    child: Text(
+                                      screens[index].desc,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        fontFamily: 'Montserrat',
+                                        color: Color.fromRGBO(41, 50, 65, 1.0),
+                                      ),
+                                    ),
+                                  )
+                                : Padding(
+                                    padding: const EdgeInsets.only(top: 20.0),
+                                    child: Container(
+                                      width: 200.0,
+                                      child: Form(
+                                        key: _formKey,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            TextFormField(
+                                              controller: username,
+                                              textAlign: TextAlign.center,
+                                              decoration: InputDecoration(
+                                                hintText: "Write your name!",
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.white),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          25.7),
+                                                ),
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: Colors.white),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          25.7),
+                                                ),
+                                                fillColor: Colors.white,
+                                                filled: true,
 
-                      if (index == screens.length - 1) {
-                        await _storeOnboardInfo();
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context) => Home()));
-                      } else {
-                        if (screens[index].input) {
-                          if (username.text != "") {
-                            SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            prefs.setString('name', username.text);
-                            _pageController.nextPage(
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.bounceIn);
-                          } else {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return CustomDialogBox(
-                                    title: "Tell me your name please :(",
-                                    descriptions: "",
-                                    text: "Okay!",
-                                    img: Image.asset("assets/images/img-3.png"),
-                                  );
-                                });
-                          }
-                        } else {
-                          _pageController.nextPage(
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.bounceIn);
-                        }
-                      }
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30.0, vertical: 10),
-                      decoration: BoxDecoration(
-                          color: pink,
-                          borderRadius: BorderRadius.circular(15.0)),
-                      child:
-                          Row(mainAxisSize: MainAxisSize.min, children: const [
-                        Text("Next",
-                            style: TextStyle(
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white)),
-                        SizedBox(
-                          width: 15.0,
-                        ),
-                        Icon(
-                          Icons.arrow_forward_sharp,
-                          color: Colors.white,
-                        )
-                      ]),
+                                                //fillColor: Colors.green
+                                              ),
+                                              validator: (String? value) {
+                                                if (value == null ||
+                                                    value.isEmpty) {
+                                                  return 'Please tell me :(';
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                          ]),
                     ),
-                  )
-                ],
+                    Container(
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 45,
+                              child: ListView.builder(
+                                itemCount: screens.length,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 3.0),
+                                          width: currentIndex == index ? 40 : 8,
+                                          height: 8,
+                                          decoration: BoxDecoration(
+                                            color: currentIndex == index
+                                                ? jasmine
+                                                : yellowcrayola,
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                        ),
+                                      ]);
+                                },
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                // ignore: avoid_print
+                                print(index);
+
+                                if (index == screens.length - 1) {
+                                  await _storeOnboardInfo();
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => const Home()));
+                                } else {
+                                  if (screens[index].input) {
+                                    if (username.text != "") {
+                                      SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
+                                      prefs.setString('name', username.text);
+                                      _pageController.nextPage(
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          curve: Curves.bounceIn);
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return CustomDialogBox(
+                                              title:
+                                                  "Tell me your name please :(",
+                                              descriptions: "",
+                                              text: "Okay!",
+                                              img: Image.asset(
+                                                  "assets/images/img-3.png"),
+                                            );
+                                          });
+                                    }
+                                  } else {
+                                    _pageController.nextPage(
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                        curve: Curves.bounceIn);
+                                  }
+                                }
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 30.0, vertical: 10),
+                                decoration: BoxDecoration(
+                                    color: babyblue,
+                                    borderRadius: BorderRadius.circular(15.0)),
+                                child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text("Next",
+                                          style: TextStyle(
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold,
+                                              color: white)),
+                                      SizedBox(
+                                        width: 15.0,
+                                      ),
+                                      Icon(
+                                        Icons.arrow_forward_sharp,
+                                        color: white,
+                                      )
+                                    ]),
+                              ),
+                            )
+                          ],
+                        ).wFull(context),
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.height * .832,
+                            bottom: MediaQuery.of(context).viewInsets.bottom)),
+                  ],
+                ),
               );
             }),
       ),
