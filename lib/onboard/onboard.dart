@@ -133,7 +133,9 @@ class _OnBoardState extends State<OnBoard> {
                               height: 250,
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 30.0),
+                              padding: EdgeInsets.only(
+                                  top:
+                                      MediaQuery.of(context).size.height * .02),
                               child: Text(screens[index].text,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
@@ -146,7 +148,10 @@ class _OnBoardState extends State<OnBoard> {
                             .8.heightBox,
                             screens[index].input != true
                                 ? Padding(
-                                    padding: const EdgeInsets.only(top: 30.0),
+                                    padding: EdgeInsets.only(
+                                        top:
+                                            MediaQuery.of(context).size.height *
+                                                .02),
                                     child: Text(
                                       screens[index].desc,
                                       textAlign: TextAlign.center,
@@ -158,7 +163,10 @@ class _OnBoardState extends State<OnBoard> {
                                     ),
                                   )
                                 : Padding(
-                                    padding: const EdgeInsets.only(top: 20.0),
+                                    padding: EdgeInsets.only(
+                                        top:
+                                            MediaQuery.of(context).size.height *
+                                                .02),
                                     child: Container(
                                       width: 200.0,
                                       child: Form(
