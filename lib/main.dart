@@ -1,4 +1,5 @@
 import 'package:moodamay/home.dart';
+import 'package:moodamay/navigation_bar.dart';
 import 'package:moodamay/onboard/onboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: isviewed != 0 ? OnBoard() : Home(),
+      home: isviewed != 0 ? OnBoard() : NavigationBar(),
     );
   }
 }
