@@ -19,7 +19,7 @@ class DatabaseHandler {
   Future<int> insertMood(UserMood mood) async {
     int result = 0;
     final Database db = await initializeDB();
-    result = await db.insert('user_moods', mood.toMap());
+    result = await db.insert('user_mood', mood.toMap());
 
     return result;
   }
@@ -27,14 +27,14 @@ class DatabaseHandler {
   Future<List<UserMood>> getMoods() async {
     final Database db = await initializeDB();
     final List<Map<String, Object?>> queryResult =
-        await db.rawQuery('SELECT * FROM user_moods order by id desc');
+        await db.rawQuery('SELECT * FROM user_mood order by id desc');
     return queryResult.map((e) => UserMood.fromMap(e)).toList();
   }
 
   Future<void> deleteMood(int id) async {
     final db = await initializeDB();
     await db.delete(
-      'user_moods',
+      'user_mood',
       where: "id = ?",
       whereArgs: [id],
     );
