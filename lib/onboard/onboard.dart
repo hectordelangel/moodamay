@@ -26,7 +26,7 @@ class _OnBoardState extends State<OnBoard> {
     OnboardModel(
       img: 'assets/images/img-1.png',
       text: "Welcome to Moodamay!",
-      desc: "My name is hectorin and I'll be your guide",
+      desc: "Your personal mood journal",
       bg: kblue,
       input: false,
       button: const Color(0xFF4756DF),
@@ -34,7 +34,7 @@ class _OnBoardState extends State<OnBoard> {
     OnboardModel(
       img: 'assets/images/img-2.png',
       text:
-          "I would like us to get to know each other better, can you tell me your name?",
+          "I would like to get to know you better, can you tell me your name?",
       desc: "",
       input: true,
       bg: kblue,
