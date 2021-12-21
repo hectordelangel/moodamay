@@ -20,14 +20,21 @@ class _JournalState extends State<Journal> {
     return SafeArea(
       top: false,
       child: Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            backgroundColor: kblue,
+            foregroundColor: babyblue,
+            title: Text(
+              'Tell me your day!',
+              style: TextStyle(fontSize: 25),
+            ),
+          ),
           body: Container(
             color: white,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Container(
                 alignment: Alignment.topCenter,
-                child: Text("Puto Diario"),
+                child: Text("Diario"),
               )
             ]),
           )),

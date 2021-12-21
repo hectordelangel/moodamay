@@ -26,7 +26,8 @@ class DatabaseHandler {
 
   Future<List<UserMood>> getMoods() async {
     final Database db = await initializeDB();
-    final List<Map<String, Object?>> queryResult = await db.query('user_moods');
+    final List<Map<String, Object?>> queryResult =
+        await db.rawQuery('SELECT * FROM user_moods order by id desc');
     return queryResult.map((e) => UserMood.fromMap(e)).toList();
   }
 

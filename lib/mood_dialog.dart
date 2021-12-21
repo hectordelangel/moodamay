@@ -3,11 +3,11 @@ import 'package:moodamay/constant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomDialogBox extends StatefulWidget {
+class CustomMoodDialogBox extends StatefulWidget {
   final String title, descriptions, text;
   final Image img;
 
-  const CustomDialogBox(
+  const CustomMoodDialogBox(
       {Key? key,
       required this.title,
       required this.descriptions,
@@ -16,10 +16,10 @@ class CustomDialogBox extends StatefulWidget {
       : super(key: key);
 
   @override
-  _CustomDialogBoxState createState() => _CustomDialogBoxState();
+  _CustomMoodDialogBoxState createState() => _CustomMoodDialogBoxState();
 }
 
-class _CustomDialogBoxState extends State<CustomDialogBox> {
+class _CustomMoodDialogBoxState extends State<CustomMoodDialogBox> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -36,6 +36,7 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
     return Stack(
       children: <Widget>[
         Container(
+          height: MediaQuery.of(context).size.height * 0.45,
           padding: EdgeInsets.only(
               left: padding,
               top: avatarRadius + padding,
@@ -50,37 +51,41 @@ class _CustomDialogBoxState extends State<CustomDialogBox> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
+              SizedBox(
+                height: 15,
+              ),
               Text(
                 widget.title,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
               ),
               SizedBox(
+                height: 10,
+              ),
+              Text(
+                widget.text,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey[500]),
+              ),
+              SizedBox(
                 height: 15,
               ),
-              // Text(
-              //   widget.descriptions,
-              //   style: TextStyle(fontSize: 14),
-              //   textAlign: TextAlign.center,
-              // ),
-
+              Text(
+                widget.descriptions,
+                style: TextStyle(fontSize: 14),
+                textAlign: TextAlign.justify,
+              ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      widget.text,
-                      style: TextStyle(fontSize: 18),
-                    )),
               ),
             ],
           ),
         ),
         Positioned(
+          height: MediaQuery.of(context).size.height * 0.2,
           left: padding,
           right: padding,
+          top: MediaQuery.of(context).size.height * -0.03,
           child: CircleAvatar(
             backgroundColor: Colors.transparent,
             radius: avatarRadius,

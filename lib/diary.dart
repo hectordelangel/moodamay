@@ -25,7 +25,7 @@ class _DiaryState extends State<Diary> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
             alignment: Alignment.topCenter,
-            child: Text("El puto diario"),
+            child: Text("Diario"),
           )
         ]),
       )),
